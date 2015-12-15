@@ -129,6 +129,11 @@ public class Checkin {
       status.put("manufacturer", info.manufacturer);
       status.put("model", info.model);
       status.put("os", info.os);
+      
+//    We should add some resource constraints information into the message sent to the server
+    status.put("cpu_race",info.cpu_race);
+    status.put("mem_race",info.memory_race);
+    status.put("network_race",info.network_race);
       /**
        * TODO: checkin task don't belongs to any app. So we just fill
        * request_app field with server task key   

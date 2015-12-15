@@ -94,11 +94,11 @@ public interface Config {
   public static final int DEFAULT_BATTERY_THRESH_PRECENT = 60;
   
   // The default checkin interval in seconds
-  public static final long DEFAULT_CHECKIN_INTERVAL_SEC = 60 * 60L;
-  public static final long MIN_CHECKIN_INTERVAL_SEC = 3600L;
-  public static final long MAX_CHECKIN_INTERVAL_SEC = 24 * 3600L;
-  public static final long MIN_CHECKIN_RETRY_INTERVAL_SEC = 20L;
-  public static final long MAX_CHECKIN_RETRY_INTERVAL_SEC = 60L;
+  public static final long DEFAULT_CHECKIN_INTERVAL_SEC = 60L;
+  public static final long MIN_CHECKIN_INTERVAL_SEC = 10L;
+  public static final long MAX_CHECKIN_INTERVAL_SEC = 600L;
+  public static final long MIN_CHECKIN_RETRY_INTERVAL_SEC = 10L;
+  public static final long MAX_CHECKIN_RETRY_INTERVAL_SEC = 30L;
   public static final int MAX_CHECKIN_RETRY_COUNT = 3;
   public static final long PAUSE_BETWEEN_CHECKIN_CHANGE_MSEC = 1 * 60 * 1000L;
   
