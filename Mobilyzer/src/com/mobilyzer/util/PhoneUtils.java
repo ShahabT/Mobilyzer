@@ -15,6 +15,8 @@
 package com.mobilyzer.util;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.app.ActivityManager.MemoryInfo;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -837,20 +839,17 @@ public class PhoneUtils {
 		    long totalSize = 0L;
 		    double usedPercentage = 0;
 		    try {
-//		    	Method 1
-		        Runtime info = Runtime.getRuntime();
-		        freeSize = info.freeMemory();
-		        totalSize = info.totalMemory();
+//		        Method 1
+			    ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+			    MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+			    activityManager.getMemoryInfo(memoryInfo);
+			    
+			    freeSize = memoryInfo.availMem;
+			    totalSize = memoryInfo.totalMem;
 		        
 		    } catch (Exception e) {
 		        e.printStackTrace();
-//		        Method 2
-//			    ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-//			    MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-//			    activityManager.getMemoryInfo(memoryInfo);
-//			    
-//			    freeSize = memoryInfo.availMem;
-//			    totalSize = memoryInfo.totalMem;
+
 		    }
 		    Logger.i("Get memory race:"+ Double.toString(usedPercentage) );
 		    usedPercentage = (totalSize - freeSize)*1.0/totalSize;
