@@ -63,6 +63,9 @@ public class MeasurementResult implements Parcelable {
   private MeasurementDesc parameters;
   private HashMap<String, String> values;
   private ArrayList<HashMap<String, String>> contextResults;
+  
+//  For smartMobilyzer client, when sending measurement result, we need to add taskId as well.
+  private String taskId;
 
   public enum TaskProgress {
     COMPLETED, PAUSED, FAILED, RESCHEDULED
@@ -115,6 +118,16 @@ public class MeasurementResult implements Parcelable {
     error.printStackTrace(printWriter);
     return result.toString();
   }
+  
+  
+//  This is for SmartMobilyzer
+  public void setTaskId(String id){
+	  taskId = id;
+  }
+  
+  public String getTaskId(String id){
+	  return taskId;
+  }
 
   /**
    * Creates measurement result for the failed task by including the error message
@@ -147,6 +160,11 @@ public class MeasurementResult implements Parcelable {
             phoneUtils.getDeviceProperty(task.getKey()), task.getType(),
             System.currentTimeMillis() * 1000,
             TaskProgress.FAILED, task.measurementDesc);
+      
+//      This is for SmartMobilyzer
+      r.setTaskId(task.getTaskId());
+      
+      
       Logger.e(error.toString() + "\n" + getStackTrace(error));
       r.addResult("error", error.toString());
       results.add(r);

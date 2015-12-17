@@ -874,7 +874,7 @@ public class MeasurementScheduler extends Service {
     }
     
 //    Set global static checkinInterval for phoneutils
-    Logger.d("Set check in interval: "+this.checkinIntervalSec);
+//    Logger.d("Set check in interval: "+this.checkinIntervalSec);
     PhoneUtils.checkinInterval = this.checkinIntervalSec;
     
     return this.checkinIntervalSec;

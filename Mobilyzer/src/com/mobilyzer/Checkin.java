@@ -270,6 +270,8 @@ public class Checkin {
     for (;i<resultArray.length();i++){
       try {
         chunckedArray.put(resultArray.getJSONObject(i));
+        Logger.d("submitting results: "+ chunckedArray.toString());
+        
       } catch (JSONException e) {
         Logger.e("Error when adding index " +i + " to array");
       }
