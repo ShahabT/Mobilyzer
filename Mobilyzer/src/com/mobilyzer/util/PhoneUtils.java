@@ -853,12 +853,16 @@ public class PhoneUtils {
 		    }
 		    Logger.i("Get memory race:"+ Double.toString(usedPercentage) );
 		    usedPercentage = (totalSize - freeSize)*1.0/totalSize;
-		  	    
+		  	
+		    Logger.d("getMemoryRace Called: "+usedPercentage);
+		    
 		    return usedPercentage;
 	  }
 	  
 	  
 	  private double getCpuRace() {
+		  
+		 
 
 		    String tempString = executeTop();
 
@@ -878,7 +882,10 @@ public class PhoneUtils {
 		        myString[i] = myString[i].trim();
 		        cpuUsageAsInt[i] = Integer.parseInt(myString[i]);
 		    }
-		    return (cpuUsageAsInt[0]+cpuUsageAsInt[1])/100.0;
+		    double ret = (cpuUsageAsInt[0]+cpuUsageAsInt[1])/100.0;
+		    Logger.d("getCpuRace Called: "+ret);
+		    
+		    return ret;
 		}
 
 	//  The system call top to get cpu usage info
@@ -927,6 +934,10 @@ public class PhoneUtils {
 			long tx = TrafficStats.getTotalTxBytes();
 			
 			if(lastRx+lastTx==0){
+				lastRx = rx;
+				lastTx = tx;
+				
+				Logger.d("getNetworkRace Called: "+0);
 				return 0;
 			}
 			else{
@@ -934,6 +945,7 @@ public class PhoneUtils {
 				double avgNetUtil = (rx+tx-lastRx-lastTx)/Config.DEFAULT_CHECKIN_INTERVAL_SEC/1000.0;
 				lastRx = rx;
 				lastTx = tx;
+				Logger.d("getNetworkRace Called: "+avgNetUtil);
 				return avgNetUtil;
 			}
 		}
@@ -947,12 +959,13 @@ public class PhoneUtils {
 			deviceInfo.model = Build.MODEL;
 			deviceInfo.os = getVersionStr();
 			deviceInfo.user = Build.VERSION.CODENAME;
-			
-//	      Collect info for cpu, memory and network resource races
-		      deviceInfo.cpu_race = getCpuRace();
-		      deviceInfo.memory_race = getMemoryRace() ;
-		      deviceInfo.network_race = getNetworkRace();
 		}
+		
+//	      Collect info for cpu, memory and network resource races
+      deviceInfo.cpu_race = getCpuRace();
+      deviceInfo.memory_race = getMemoryRace() ;
+      deviceInfo.network_race = getNetworkRace();
+		
 
 		return deviceInfo;
 	}

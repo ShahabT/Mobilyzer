@@ -11,8 +11,8 @@ public interface Config {
   /**
    * Strings migrated from string.xml
    */
-  public static final String SERVER_URL = "https://openmobiledata.appspot.com";
-  public static final String ANONYMOUS_SERVER_URL = "https://openmobiledata.appspot.com/anonymous";
+  public static final String SERVER_URL = "https://smartmobilyzer.appspot.com";
+  public static final String ANONYMOUS_SERVER_URL = "https://smartmobilyzer.appspot.com/anonymous";
   public static final String TEST_SERVER_URL = "";
   public static final String DEFAULT_USER = "Anonymous";
 
@@ -94,13 +94,13 @@ public interface Config {
   public static final int DEFAULT_BATTERY_THRESH_PRECENT = 60;
   
   // The default checkin interval in seconds
-  public static final long DEFAULT_CHECKIN_INTERVAL_SEC = 60L;
+  public static final long DEFAULT_CHECKIN_INTERVAL_SEC = 30L;
   public static final long MIN_CHECKIN_INTERVAL_SEC = 10L;
   public static final long MAX_CHECKIN_INTERVAL_SEC = 600L;
   public static final long MIN_CHECKIN_RETRY_INTERVAL_SEC = 10L;
   public static final long MAX_CHECKIN_RETRY_INTERVAL_SEC = 30L;
   public static final int MAX_CHECKIN_RETRY_COUNT = 3;
-  public static final long PAUSE_BETWEEN_CHECKIN_CHANGE_MSEC = 1 * 60 * 1000L;
+  public static final long PAUSE_BETWEEN_CHECKIN_CHANGE_MSEC = 1 * 20 * 1000L;
   
   public static final int DEFAULT_DATA_MONITOR_PERIOD_DAY= 1;
   
