@@ -156,6 +156,9 @@ public class PhoneUtils {
 //  For checking network utilization
   private long lastTx = 0;
   private long lastRx = 0;
+  
+//  For network
+  public static long checkinInterval = Config.DEFAULT_CHECKIN_INTERVAL_SEC;
 
 	protected PhoneUtils(Context context) {
 		this.context = context;
@@ -942,7 +945,7 @@ public class PhoneUtils {
 			}
 			else{
 //				Return average network utilization since last checkin
-				double avgNetUtil = (rx+tx-lastRx-lastTx)/Config.DEFAULT_CHECKIN_INTERVAL_SEC/1000.0;
+				double avgNetUtil = (rx+tx-lastRx-lastTx)/checkinInterval/1000.0;
 				lastRx = rx;
 				lastTx = tx;
 				Logger.d("getNetworkRace Called: "+avgNetUtil);

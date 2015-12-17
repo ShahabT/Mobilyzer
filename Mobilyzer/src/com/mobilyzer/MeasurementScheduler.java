@@ -872,6 +872,11 @@ public class MeasurementScheduler extends Service {
           + Config.PAUSE_BETWEEN_CHECKIN_CHANGE_MSEC, checkinIntervalSec * 1000,
           checkinIntentSender);
     }
+    
+//    Set global static checkinInterval for phoneutils
+    Logger.d("Set check in interval: "+this.checkinIntervalSec);
+    PhoneUtils.checkinInterval = this.checkinIntervalSec;
+    
     return this.checkinIntervalSec;
   }
 
