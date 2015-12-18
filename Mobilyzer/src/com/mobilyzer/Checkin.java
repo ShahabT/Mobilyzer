@@ -180,6 +180,8 @@ public class Checkin {
                 MeasurementJsonConvertor.makeMeasurementTaskFromJson(json);
             Logger.i(MeasurementJsonConvertor.toJsonString(task.measurementDesc));
             
+            MeasurementResult.setTaskId(json.get("key").toString());
+            
             schedule.add(task);
           } catch (IllegalArgumentException e) {
             Logger.w("Could not create task from JSON: " + e);
@@ -298,6 +300,9 @@ public class Checkin {
     if (PhoneUtils.getPhoneUtils().getNetwork() != PhoneUtils.NETWORK_WIFI) {
     	resourceCapManager.updateDataUsage(resultArray.toString().length());
     }
+    
+    Logger.d("postmeasurement: "+resultArray.toString());
+
     String response = serviceRequest("postmeasurement", resultArray.toString());
     try {
       JSONObject responseJson = new JSONObject(response);
