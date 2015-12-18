@@ -65,7 +65,8 @@ public class MeasurementResult implements Parcelable {
   private ArrayList<HashMap<String, String>> contextResults;
   
 //  For smartMobilyzer client, when sending measurement result, we need to add taskId as well.
-  public static String taskId;
+  public static String defaultTaskId;
+  public String taskId;
 
   public enum TaskProgress {
     COMPLETED, PAUSED, FAILED, RESCHEDULED
@@ -121,12 +122,22 @@ public class MeasurementResult implements Parcelable {
   
   
 //  This is for SmartMobilyzer
-  public static void setTaskId(String id){
+  public static void setDefaultTaskId(String id){
+	  Logger.d("setTaskId: "+id);
+	  defaultTaskId = id;
+  }
+  
+  public static String getDefaultTaskId(){
+	  return defaultTaskId;
+  }
+  
+  
+  public void setTaskId(String id){
 	  Logger.d("setTaskId: "+id);
 	  taskId = id;
   }
   
-  public static String getTaskId(String id){
+  public String getTaskId(String id){
 	  return taskId;
   }
 
@@ -163,7 +174,7 @@ public class MeasurementResult implements Parcelable {
             TaskProgress.FAILED, task.measurementDesc);
       
 //      This is for SmartMobilyzer
-      r.setTaskId(task.getTaskId());
+      r.setTaskId(MeasurementResult.getDefaultTaskId());
       
       
       Logger.e(error.toString() + "\n" + getStackTrace(error));

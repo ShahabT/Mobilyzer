@@ -180,7 +180,7 @@ public class Checkin {
                 MeasurementJsonConvertor.makeMeasurementTaskFromJson(json);
             Logger.i(MeasurementJsonConvertor.toJsonString(task.measurementDesc));
             
-            MeasurementResult.setTaskId(json.get("key").toString());
+            MeasurementResult.setDefaultTaskId(json.get("key").toString());
             
             schedule.add(task);
           } catch (IllegalArgumentException e) {
@@ -261,6 +261,7 @@ public class Checkin {
     JSONArray resultArray = readResultsFromFile();
     for (MeasurementResult result : finishedTasks) {
       try {
+    	  result.setTaskId(MeasurementResult.getDefaultTaskId());
         resultArray.put(MeasurementJsonConvertor.encodeToJson(result));
       } catch (JSONException e1) {
         Logger.e("Error when adding " + result);
