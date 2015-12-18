@@ -3,8 +3,8 @@
     package="com.mobilyzer">
     
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
+        android:minSdkVersion="19"
+        android:targetSdkVersion="21" />
     
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.BATTERY_STATS" />
